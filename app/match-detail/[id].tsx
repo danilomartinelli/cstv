@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import Colors from "../../constants/Colors";
 
 export default function MatchDetailPage() {
     return (
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+        color: Colors.text,
     },
     link: {
         marginTop: 15,
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
     },
     linkText: {
         fontSize: 14,
-        color: '#2e78b7',
+        color: Colors.text,
     },
 });

@@ -3,10 +3,15 @@ import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {Slot} from "expo-router";
 import {StyleSheet, View} from "react-native";
+import Colors from "../constants/Colors";
+import {StatusBar} from 'expo-status-bar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+    const insets = useSafeAreaInsets();
+
     const [fontsLoaded] = useFonts({
         'Roboto': require('../assets/fonts/Roboto.ttf'),
     });
@@ -22,14 +27,18 @@ export default function App() {
     }
 
     return (
-        <View style={styles.container} onLayout={onLayoutRootView}>
-            <Slot/>
-        </View>
+        <>
+            <StatusBar style="light"/>
+            <View style={[styles.container, { paddingTop: insets.top }]} onLayout={onLayoutRootView}>
+                <Slot/>
+            </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Colors.background
     },
 });

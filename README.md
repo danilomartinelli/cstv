@@ -14,7 +14,6 @@ Certifique-se de que você tem o seguinte instalado antes de prosseguir:
 
 - `@react-navigation/native`: Biblioteca robusta para navegação entre telas dentro do aplicativo.
 - `@shopify/flash-list`: Uma implementação otimizada de lista virtualizada para exibir grandes listas de dados de forma eficiente.
-- `apisauce`: Um wrapper elegante em torno do Axios que simplifica a comunicação com APIs HTTP.
 - `date-fns`: Biblioteca moderna para manipulação de datas, utilizada para formatar e calcular datas e horários dos jogos.
 - `expo`: Uma plataforma aberta para construir e publicar projetos React Native.
 - `expo-font`, `expo-linking`, `expo-router`, `expo-splash-screen`, `expo-status-bar`, `expo-system-ui`, `expo-web-browser`: Conjunto de bibliotecas Expo para gerenciamento de fontes personalizadas, deep linking, roteamento, splash screens, barra de status, UI do sistema e o navegador web.

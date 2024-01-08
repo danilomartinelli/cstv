@@ -14,7 +14,7 @@ export default function MatchDetailPage() {
 
     if (!match) return null;
 
-    const [{data: playersHomeTeam}] = useFetch<Player[]>(
+    const {data: playersHomeTeam} = useFetch<Player[]>(
         `https://api.pandascore.co/csgo/players?filter[team_id]=${match.opponents[0].opponent.id}`,
         {
             headers: {
@@ -24,7 +24,7 @@ export default function MatchDetailPage() {
         }
     )
 
-    const [{data: playersGuestTeam}] = useFetch<Player[]>(
+    const {data: playersGuestTeam} = useFetch<Player[]>(
         `https://api.pandascore.co/csgo/players?filter[team_id]=${match.opponents[1].opponent.id}`,
         {
             headers: {

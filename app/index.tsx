@@ -11,7 +11,7 @@ import {matchState} from "../store/match";
 export default function MainPage() {
     const [, setMatch] = useRecoilState(matchState);
 
-    const [{data: runningMatches}] = useFetch<Match[]>(
+    const {data: runningMatches} = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/running?filter[opponents_filled]=true",
         {
             headers: {
@@ -21,7 +21,7 @@ export default function MainPage() {
         }
     )
 
-    const [{data: upcomingMatches}] = useFetch<Match[]>(
+    const {data: upcomingMatches} = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/upcoming?filter[opponents_filled]=true",
         {
             headers: {

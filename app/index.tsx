@@ -4,6 +4,7 @@ import {useFetch} from "../hooks/useFetch";
 import {Match} from "../types";
 import {FlashList} from "@shopify/flash-list";
 import {Card} from "../components/Card";
+import {router} from "expo-router";
 
 export default function MainPage() {
     const [{data: runningMatches}] = useFetch<Match[]>(
@@ -26,6 +27,10 @@ export default function MainPage() {
         }
     )
 
+    const handlePress = (id: number) => {
+        router.push(`/matchDetail/${id}`)
+    }
+
     if (!upcomingMatches || !runningMatches) {
         return (
             <View style={styles.centerContainer}>
@@ -40,7 +45,11 @@ export default function MainPage() {
             <FlashList
                 data={[...runningMatches, ...upcomingMatches]}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({item}) => <Card match={item}/>}
+                renderItem={({item}) => (
+                    <TouchableOpacity onPress={() => handlePress(item.id)}>
+                        <Card match={item}/>
+                    </TouchableOpacity>
+                )}
                 estimatedItemSize={176}
                 ItemSeparatorComponent={() => <View style={{height: 23}}/>}
             />

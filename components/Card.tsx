@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, View} from "react-native";
 import Colors from "../constants/Colors";
 import {Match} from "../types";
 import {formatMatchDate} from "../utils/formatMatchDate";
+import {Opponents} from "./Opponents";
 
 interface CardProps {
     match: Match;
@@ -17,17 +18,7 @@ export const Card = ({match}: CardProps) => {
                     }
                 </Text>
             </View>
-            <View style={styles.opponents}>
-                <View style={styles.imageContainer}>
-                    <Image source={{uri: match.opponents[0].opponent.image_url}} resizeMode="contain" style={styles.image}/>
-                    <Text style={styles.opponentName}>{match.opponents[0].opponent.name}</Text>
-                </View>
-                <Text style={styles.vsText}>vs</Text>
-                <View style={styles.imageContainer}>
-                    <Image source={{uri: match.opponents[1].opponent.image_url}} resizeMode="contain" style={styles.image}/>
-                    <Text style={styles.opponentName}>{match.opponents[1].opponent.name}</Text>
-                </View>
-            </View>
+            <Opponents opponents={match.opponents} />
             <View style={styles.league}>
                 <Image source={{uri: match.league.image_url}} resizeMode="contain" style={styles.leagueImage}/>
                 <Text style={styles.leagueText}>

@@ -2,6 +2,7 @@ export type MatchStatus = "finished" | "not_played" | "not_started" | "running";
 
 export interface Opponent {
     opponent: {
+        id: number;
         name: string;
         image_url: string;
     }
@@ -23,4 +24,12 @@ export interface Match {
     opponents: Opponent[];
     league: League;
     serie: Serie;
+}
+
+export interface Player {
+    id: number;
+    first_name: string;
+    last_name: string;
+    slug: string;
+    image_url: string | null;
 }

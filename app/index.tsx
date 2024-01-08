@@ -5,8 +5,12 @@ import {Match} from "../types";
 import {FlashList} from "@shopify/flash-list";
 import {Card} from "../components/Card";
 import {router} from "expo-router";
+import {useRecoilState} from "recoil";
+import {matchState} from "../store/match";
 
 export default function MainPage() {
+    const [, setMatch] = useRecoilState(matchState);
+
     const [{data: runningMatches}] = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/running?filter[opponents_filled]=true",
         {
@@ -27,8 +31,9 @@ export default function MainPage() {
         }
     )
 
-    const handlePress = (id: number) => {
-        router.push(`/matchDetail/${id}`)
+    const handlePress = (item: Match) => {
+        setMatch(item)
+        router.push("/matchDetail")
     }
 
     if (!upcomingMatches || !runningMatches) {
@@ -46,7 +51,7 @@ export default function MainPage() {
                 data={[...runningMatches, ...upcomingMatches]}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => handlePress(item.id)}>
+                    <TouchableOpacity onPress={() => handlePress(item)}>
                         <Card match={item}/>
                     </TouchableOpacity>
                 )}

@@ -6,6 +6,7 @@ import {StyleSheet, View} from "react-native";
 import Colors from "../constants/Colors";
 import {StatusBar} from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {RecoilRoot} from "recoil";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,12 +28,12 @@ export default function App() {
     }
 
     return (
-        <>
+        <RecoilRoot>
             <StatusBar style="light"/>
             <View style={[styles.container, { paddingTop: insets.top }]} onLayout={onLayoutRootView}>
                 <Slot/>
             </View>
-        </>
+        </RecoilRoot>
     );
 }
 

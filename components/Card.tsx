@@ -21,7 +21,7 @@ export const Card = ({match}: CardProps) => {
             <Opponents opponents={match.opponents} />
             <View style={styles.league}>
                 <Image source={{uri: match.league.image_url}} resizeMode="contain" style={styles.leagueImage}/>
-                <Text style={styles.leagueText}>
+                <Text numberOfLines={1} style={styles.leagueText}>
                     {`${match.league.name} - ${match.serie.full_name}`}
                 </Text>
             </View>
@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 8,
         fontWeight: '400',
+        maxWidth: 200,
+        overflow: 'hidden',
     },
     imageContainer: {
         alignItems: 'center',

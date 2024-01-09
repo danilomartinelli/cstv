@@ -1,21 +1,29 @@
 import {Image, StyleSheet, Text, View} from "react-native";
-import { Match } from "../types";
+import {Match} from "../types";
 import Colors from "../constants/Colors";
 
 interface OpponentsProps {
     opponents: Match["opponents"];
 }
 
-export const Opponents = ({ opponents }: OpponentsProps) => {
+export const Opponents = ({opponents}: OpponentsProps) => {
     return (
         <View style={styles.opponents}>
             <View style={styles.imageContainer}>
-                <Image source={{uri: opponents[0].opponent.image_url}} resizeMode="contain" style={styles.image}/>
+                <Image source={{uri: opponents[0].opponent.image_url}} resizeMode="contain"
+                       style={[styles.image, !opponents[0].opponent.image_url && {
+                           backgroundColor: "#C4C4C4",
+                           borderRadius: 8
+                       }]}/>
                 <Text style={styles.opponentName}>{opponents[0].opponent.name}</Text>
             </View>
             <Text style={styles.vsText}>vs</Text>
             <View style={styles.imageContainer}>
-                <Image source={{uri: opponents[1].opponent.image_url}} resizeMode="contain" style={styles.image}/>
+                <Image source={{uri: opponents[1].opponent.image_url}} resizeMode="contain"
+                       style={[styles.image, !opponents[1].opponent.image_url && {
+                           backgroundColor: "#C4C4C4",
+                           borderRadius: 8
+                       }]}/>
                 <Text style={styles.opponentName}>{opponents[1].opponent.name}</Text>
             </View>
         </View>

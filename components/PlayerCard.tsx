@@ -12,8 +12,8 @@ interface PlayerCardProps {
 const Content = ({player, orientation}: { player: Player, orientation: Orientation }) => {
     return (
         <View style={[styles.content, orientation === "left" ? styles.leftContent : styles.rightContent]}>
-            <Text numberOfLines={1} style={styles.nickname}>{player.slug}</Text>
-            <Text numberOfLines={1} style={styles.fullName}>{`${player.first_name} ${player.last_name}`}</Text>
+            <Text numberOfLines={1} style={styles.nickname}>{player.slug || "Não Fornecido"}</Text>
+            <Text numberOfLines={1} style={styles.fullName}>{`${player.first_name || "Não Fornecido"} ${player.last_name || ""}`}</Text>
         </View>
     )
 }

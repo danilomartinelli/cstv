@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useRef } from 'react'
+import {useEffect, useReducer, useRef} from 'react'
 
 interface State<T> {
     data?: T
     error?: Error
+    loading: boolean
 }
 
 type Cache<T> = { [url: string]: T }
@@ -23,16 +24,18 @@ export function useFetch<T = unknown>(
     const initialState: State<T> = {
         error: undefined,
         data: undefined,
+        loading: false
     }
+
 
     const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
         switch (action.type) {
             case 'loading':
-                return { ...initialState }
+                return {...initialState, loading: true}
             case 'fetched':
-                return { ...initialState, data: action.payload }
+                return {...initialState, data: action.payload, loading: false}
             case 'error':
-                return { ...initialState, error: action.payload }
+                return {...initialState, error: action.payload, loading: false}
             default:
                 return state
         }
@@ -46,10 +49,10 @@ export function useFetch<T = unknown>(
         cancelRequest.current = false
 
         const fetchData = async () => {
-            dispatch({ type: 'loading' })
+            dispatch({type: 'loading'})
 
             if (cache.current[url]) {
-                dispatch({ type: 'fetched', payload: cache.current[url] })
+                dispatch({type: 'fetched', payload: cache.current[url]})
                 return
             }
 
@@ -63,11 +66,11 @@ export function useFetch<T = unknown>(
                 cache.current[url] = data
                 if (cancelRequest.current) return
 
-                dispatch({ type: 'fetched', payload: data })
+                dispatch({type: 'fetched', payload: data})
             } catch (error) {
                 if (cancelRequest.current) return
 
-                dispatch({ type: 'error', payload: error as Error })
+                dispatch({type: 'error', payload: error as Error})
             }
         }
 

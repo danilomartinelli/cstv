@@ -7,11 +7,12 @@ import {Card} from "../components/Card";
 import {router} from "expo-router";
 import {useRecoilState} from "recoil";
 import {matchState} from "../store/match";
+import {useMemo} from "react";
 
 export default function MainPage() {
     const [, setMatch] = useRecoilState(matchState);
 
-    const {data: runningMatches} = useFetch<Match[]>(
+    const {data: runningMatches, loading: loadingRunningMatches} = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/running?filter[opponents_filled]=true",
         {
             headers: {
@@ -21,7 +22,7 @@ export default function MainPage() {
         }
     )
 
-    const {data: upcomingMatches} = useFetch<Match[]>(
+    const {data: upcomingMatches, loading: loadingUpcomingMatches} = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/upcoming?filter[opponents_filled]=true",
         {
             headers: {
@@ -30,13 +31,17 @@ export default function MainPage() {
             }
         }
     )
+    
+    const matches = useMemo(() => {
+        return [...(runningMatches || []), ...(upcomingMatches || [])]
+    }, [runningMatches, upcomingMatches])
 
     const handlePress = (item: Match) => {
         setMatch(item)
         router.push("/matchDetail")
     }
 
-    if (!upcomingMatches || !runningMatches) {
+    if (loadingRunningMatches || loadingUpcomingMatches) {
         return (
             <View style={styles.centerContainer}>
                 <ActivityIndicator/>
@@ -48,7 +53,7 @@ export default function MainPage() {
         <View style={styles.container}>
             <Text style={styles.title}>Partidas</Text>
             <FlashList
-                data={[...runningMatches, ...upcomingMatches]}
+                data={matches}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => (
                     <TouchableOpacity onPress={() => handlePress(item)}>

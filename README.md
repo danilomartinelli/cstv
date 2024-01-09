@@ -22,6 +22,42 @@ Certifique-se de que você tem o seguinte instalado antes de prosseguir:
 - `react-native-gesture-handler`, `react-native-safe-area-context`, `react-native-screens`: Ferramentas para melhorar a interação do usuário, gerenciar áreas seguras em dispositivos com entalhes e otimizar as telas do aplicativo.
 - `recoil`: Biblioteca de gerenciamento de estado para React que fornece funcionalidades além do Context API para um estado global mais eficiente.
 
+## Estrutura de Diretórios
+
+Este projeto segue uma estrutura de diretórios modular e intuitiva, facilitando a navegação e a manutenção do código.
+
+- `app`: Contém os principais arquivos TypeScript para a lógica da aplicação.
+- `assets`: Armazena recursos estáticos como imagens e fontes.
+   - `fonts`: Diretório para arquivos de fontes personalizadas.
+   - `images`: Contém imagens usadas na aplicação como ícones e imagens de fundo.
+- `components`: Componentes reutilizáveis da interface do usuário.
+- `constants`: Constantes globais usadas em toda a aplicação.
+- `hooks`: Hook personalizado do React.
+- `store`: Gerenciamento de estado global
+- `utils`: Funções utilitárias.
+
+Cada arquivo e diretório tem um propósito específico e contribui para a modularidade e facilidade de entendimento do código. Mantenha esta estrutura ao adicionar novos componentes ou serviços à aplicação.
+
+## Arquitetura de Software
+
+A aplicação segue uma arquitetura baseada em componentes, que é padrão para aplicações desenvolvidas com React Native, com uma abordagem modular para separação de preocupações.
+
+### Componentes de Interface do Usuário (UI)
+- Os componentes (`components`) são as unidades de construção reutilizáveis que formam as interfaces do usuário. Eles incluem `Card`, `Header`, `Opponents`, e `PlayerCard`, cada um encapsulando sua própria lógica e estilo.
+
+### Gerenciamento de Estado
+- O estado da aplicação é gerenciado de forma centralizada (`store`), permitindo um fluxo de dados previsível e facilitando o gerenciamento de estados complexos.
+
+### Serviços e Utilitários
+- Funções utilitárias (`utils`) são usadas para operações comuns como formatação de dados, que são usadas em toda a aplicação.
+- Hooks personalizados (`hooks`) como `useFetch` encapsulam a lógica de busca de dados, tornando-a reutilizável e mais fácil de gerenciar.
+
+### Recursos Estáticos
+- Os recursos estáticos como fontes e imagens são mantidos no diretório `assets`, separando claramente os ativos de design do código.
+
+Essa arquitetura foi projetada para ser escalável, fácil de manter e testar, promovendo práticas de desenvolvimento limpas e eficientes.
+
+
 ## Instalação
 
 Siga estes passos para configurar o ambiente de desenvolvimento:

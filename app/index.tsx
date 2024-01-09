@@ -12,7 +12,7 @@ import {useMemo} from "react";
 export default function MainPage() {
     const [, setMatch] = useRecoilState(matchState);
 
-    const {data: runningMatches, loading: loadingRunningMatches} = useFetch<Match[]>(
+    const [{data: runningMatches, loading: loadingRunningMatches}, refetchRunningMatches] = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/running?filter[opponents_filled]=true",
         {
             headers: {
@@ -22,7 +22,7 @@ export default function MainPage() {
         }
     )
 
-    const {data: upcomingMatches, loading: loadingUpcomingMatches} = useFetch<Match[]>(
+    const [{data: upcomingMatches, loading: loadingUpcomingMatches}, refetchUpcomingMatches] = useFetch<Match[]>(
         "https://api.pandascore.co/csgo/matches/upcoming?filter[opponents_filled]=true",
         {
             headers: {
@@ -31,7 +31,7 @@ export default function MainPage() {
             }
         }
     )
-    
+
     const matches = useMemo(() => {
         return [...(runningMatches || []), ...(upcomingMatches || [])]
     }, [runningMatches, upcomingMatches])
@@ -62,6 +62,11 @@ export default function MainPage() {
                 )}
                 estimatedItemSize={176}
                 ItemSeparatorComponent={() => <View style={{height: 23}}/>}
+                refreshing={loadingRunningMatches || loadingUpcomingMatches}
+                onRefresh={() => {
+                    refetchRunningMatches()
+                    refetchUpcomingMatches()
+                }}
             />
         </View>
     );
